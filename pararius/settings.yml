@@ -1,0 +1,15 @@
+# Settings go here 
+
+place: den haag
+min_price: 200
+max_price: 700
+
+# You can blacklist rental agencies
+blacklist:
+  - Duinzigt Wonen B.V.
+  - Vast Wonen
+  - Woonzeker Rentals
+  
+# Email new listings from address to address 
+email_from: jasperdataculture.com
+email_to: jasperginn@gmail.com

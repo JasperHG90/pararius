@@ -1,0 +1,7 @@
+# Requirements
+httr
+rvest
+stringr
+yaml
+methods
+tibble
