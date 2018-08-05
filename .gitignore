@@ -4,3 +4,4 @@ env.list
 .RData
 .Ruserdata
 .Rprofile
+.DS_Store
