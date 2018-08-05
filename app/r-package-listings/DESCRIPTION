@@ -1,0 +1,24 @@
+Package: listings
+Type: Package
+Title: Scrape new listings from Pararius & Funda
+Version: 0.1.0
+Author: Jasper Ginn
+Maintainer: Jasper Ginn <jasperginn@gmail.com>
+Description: rentals allows the user to pass a city,
+    a minimum rent price and a maximum rent price 
+    with the aim of scraping new listings regularly.
+    If the program finds new listings, they will be
+    emailed to a user-specified address.
+Imports:
+    httr,
+    rvest,
+    stringr,
+    tibble,
+    loggit
+Depends:
+    methods,
+    utils
+License: MIT
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1

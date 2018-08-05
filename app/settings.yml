@@ -1,5 +1,6 @@
 # Settings go here 
 
+# Basics: input place, min price and max price
 place: den haag
 min_price: 200
 max_price: 700
