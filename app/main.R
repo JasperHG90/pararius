@@ -8,21 +8,17 @@
 
 ## Libraries
 library(listings)
-library(loggit)
-
-# Open log file
-loggit::setLogFile("r-package-listings-logfile.json")
+library(reticulate)
 
 ## Load settings
 settings <- yaml::read_yaml("/root/pararius/settings.yml")
 
 ## Get environment variables
-if(Sys.getenv("MAILR_HOST") == "" |
-   Sys.getenv("MAILR_PORT") == "" |
-   Sys.getenv("MAILR_USER") == "" |
-   Sys.getenv("MAILR_PWD") == "") {
+if(Sys.getenv("MAIL_HOST") == "" |
+   Sys.getenv("MAIL_PORT") == "" |
+   Sys.getenv("MAIL_USER") == "" |
+   Sys.getenv("MAIL_PWD") == "") {
 
-  loggit::loggit("ERROR", "One or more environment variables not found! Cannot send emails")
   stop("One or more environment variables not found! Cannot send emails")
 
 }
@@ -69,9 +65,38 @@ if(nrow(new) > 0) {
      '</html>'
    )
    
+   # Use reticulate to build bridge between python & R
    
+   ## Import modules 
+   smtplib <- import("smtplib")
+   email <- import("email")
    
+   ## Set up email
+   multipart <- email$mime$Multipart$MIMEMultipart('alternative')
+   multipart$set_param("From", settings$email_from)
+   multipart$set_param("To", settings$email_to)
+   multipart$set_param("Subject", "Found new listings!")
    
+   ## Record body
+   body <- email$mime$Text$MIMEText(msg, 'html')
+
+   ## Attach 
+   multipart$attach(body)
+   
+   ## Log in to gmail
+   server <- smtplib$SMTP(Sys.getenv("MAIL_HOST"), 
+                          Sys.getenv("MAIL_PORT"))
+   server$starttls()
+   server$login(Sys.getenv("MAIL_USER"), 
+                Sys.getenv("MAIL_PWD"))
+   
+   ## Send
+   server$sendmail(settings$email_from, settings$email_to, multipart$as_string())
+   
+   ## Quit server 
+   server$quit()
+   
+   ## Cat
+   message("Email sent! Quitting program.")
 
 }
-
