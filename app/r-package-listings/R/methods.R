@@ -12,8 +12,6 @@
 setGeneric("update_rentals", function(x) standardGeneric("update_rentals"))
 
 #' @rdname update_rentals-methods
-#' 
-#' @importFrom loggit loggit
 setMethod("update_rentals", "Pararius", function(x) {
 
   # Refresh proxy list
@@ -21,18 +19,12 @@ setMethod("update_rentals", "Pararius", function(x) {
   
   if(refreshed) {
     
-    loggit("INFO", "Refreshed proxy list ...")
+    message("Refreshed proxy list ...")
     
   }
 
-  # Load data
+  # Load dat?a
   db <- loadDatabase()
-  
-  if(nrow(db) == 0) {
-    
-    loggit("INFO", "This is your first run! How exciting. Initialized a new database to hold listings ...")
-    
-  }
 
   # Get listings
   req <- requestPage()
@@ -43,7 +35,7 @@ setMethod("update_rentals", "Pararius", function(x) {
   # Filter existing
   parsed <- parsed[!(parsed$url %in% db$url),]
   
-  loggit("INFO", paste0("Found ", nrow(parsed), " new listings ..."))
+  message(paste0("Found ", nrow(parsed), " new listings ..."))
 
   # Add to existing
   db <- rbind(db, parsed)

@@ -12,5 +12,5 @@ blacklist:
   - Woonzeker Rentals
   
 # Email new listings from address to address 
-email_from: jasperdataculture.com
+email_from: jasperdatacalture.com
 email_to: jasperginn@gmail.com

@@ -3,11 +3,8 @@
 # When the package is loaded, do ...
 .onLoad <- function(libname = find.package("listings"), pkgname="listings") {
   
-  # Open log file 
-  loggit::setLogFile("r-package-listings-logfile.json")
-  
   # Log
-  loggit::loggit("INFO", "package loaded ...", app = "start")
+  message("package loaded ...")
 
   # Headers
   options("PARARIUS_HEADERS" = c(
@@ -26,6 +23,6 @@
 # When the package is unloaded, do
 .onUnload <- function(libname = find.package("listings"), pkgname="listings") {
   
-  loggit::loggit("INFO", "package unloaded ...", app = "stop")
+  message("package unloaded ...")
   
 }

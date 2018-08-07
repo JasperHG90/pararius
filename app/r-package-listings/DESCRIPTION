@@ -13,8 +13,7 @@ Imports:
     httr,
     rvest,
     stringr,
-    tibble,
-    loggit
+    tibble
 Depends:
     methods,
     utils

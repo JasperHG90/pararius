@@ -132,7 +132,6 @@ getProxy <- function(proxies, filter = c()) {
 #' @importFrom httr verbose
 #' @importFrom httr timeout
 #' @importFrom httr http_error
-#' @importFrom loggit loggit
 requestPage <- function() {
 
   # Read data
@@ -173,7 +172,7 @@ requestPage <- function() {
     if(is.null(req)) {
 
       if(tries == length(getOption("PARARIUS_PROXIES"))) {
-        loggit::loggit("ERROR", "Max retries reached. None of the proxies worked!")
+        message("Max retries reached. None of the proxies worked!")
         stop("Max retries reached. None of the proxies worked!")
       }
 
@@ -197,7 +196,7 @@ requestPage <- function() {
 
       } else {
 
-        loggit("INFO", paste0("Succeeded in scraping Pararius after ", tries, " tries."))
+        message(paste0("Succeeded in scraping Pararius after ", tries, " tries."))
 
         return(req)
 
