@@ -5,3 +5,5 @@ env.list
 .Ruserdata
 .Rprofile
 .DS_Store
+.httr-oauth
+oauth.json
