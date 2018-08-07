@@ -7,3 +7,5 @@ env.list
 .DS_Store
 .httr-oauth
 oauth.json
+data/*.rds
+data/*.json
