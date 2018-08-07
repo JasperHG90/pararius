@@ -4,7 +4,7 @@
 .onLoad <- function(libname = find.package("listings"), pkgname="listings") {
   
   # Open log file 
-  loggit::setLogFile("~/r-package-listings-logfile.json")
+  loggit::setLogFile("r-package-listings-logfile.json")
   
   # Log
   loggit::loggit("INFO", "package loaded ...", app = "start")
