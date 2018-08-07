@@ -35,6 +35,22 @@ If you do end up using Gmail, keep the following in mind:
 - It is **a mistake**!! to use your own, private email address. The reason is that you must connect via SMTP (email/password) and you therefore have to turn of two-factor authentication. A better approach is to make a new email address and use that address with this app.
 - Allow 'less secure apps' to access your email account by changing the setting found [here](https://myaccount.google.com/lesssecureapps).
 
+## Settings
+
+You can change a couple of parameters in the `app/settings.yml` file. 
+
+You can set:
+
+1. The **place**: name of the city of your interest
+2. **min_price**: minimum rent price
+3. **max_price**: maximum rent price
+
+**blacklist** is a feature to stop receiving listings from certain realtors. These names must be verbatum (I suggest copying them from their Pararius page).
+
+**email_from** is the email from which you will be emailing.
+
+**email_to** is the email to which you will be emailing.
+
 ## Running the app
 
 You can run the application by executing:
