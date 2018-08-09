@@ -1,5 +1,41 @@
 # Utility functions go here
 
+#' Create a search url
+#'
+#' Based on the settings passed by the user, create a search url for Funda or Pararius
+#'
+#' @param base either one of 'funda' or 'pararius'
+#' @city name of the city
+#' @min_price minimum amount
+#' @max_price maximum amount
+#'
+#' @importFrom stringr str_replace_all
+#'
+#' @return search url for an aggregator
+searchUrl <- function(base = c("pararius", "funda"), city, min_price, max_price) {
+
+  base <- match.arg(base)
+
+  ## Replace spaces in city name
+  city <- stringr::str_replace_all(tolower(city), "\\s", "-")
+
+  if(base == "pararius") {
+
+    ## Make url
+    su <- paste0("https://www.pararius.nl/huurwoningen/", city, "/", min_price, "-", max_price)
+
+  } else {
+
+    ## Make url
+    su <- paste0("https://www.funda.nl/huur/", city, "/", min_price, "-", max_price, "/sorteer-datum-af/")
+
+  }
+
+  ## Return
+  return(su)
+
+}
+
 #' Load database if exists
 #'
 #' @return If the database 'listings.rds' exists, the function returns this database. Else, it will return an empty tibble containing the same columns.

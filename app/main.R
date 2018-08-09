@@ -40,13 +40,13 @@ if(nrow(new) > 0) {
    msg <- paste0(
      '<html>',
      '<body>',
-     '<p>Hi there! I found one or more new listings in ', settings$place, ' you might find iteresting!</p>',
+     '<p>Hi there! I found one or more new listings in ', settings$place, ' you might find interesting!</p>',
      '<br>',
      '<div>',
      paste0(
        '<ul>',
        '<li>',
-       '<p>url: ',new$url, '</p>',
+       '<p>url: <a target="blank" href="',paste0('https://www.pararius.nl', new$url), '">click here></a>', '</p>',
        '</li>',
        '<li>',
        '<p>name: ',new$name, '</p>',
