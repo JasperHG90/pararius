@@ -14,6 +14,7 @@ loadDatabase <- function() {
   } else {
 
     data_frame(
+      "date" = date(),
       "name" = character(),
       "url" = character(),
       "new" = logical(),
@@ -294,6 +295,7 @@ parsePage <- function(req) {
 
       # Return
       list(
+        date = Sys.time(),
         name = name,
         url = url,
         new = is_new,

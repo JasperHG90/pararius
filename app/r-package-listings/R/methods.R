@@ -18,7 +18,7 @@ setMethod("update_rentals", "Pararius", function(x) {
   refreshed <- refreshProxies()
   
   if(refreshed) {
-    
+   
     message("Refreshed proxy list ...")
     
   }
@@ -31,10 +31,43 @@ setMethod("update_rentals", "Pararius", function(x) {
 
   # Parse
   parsed <- parsePage(req)
+  
+  # Convert dates
+  if(nrow(parsed) > 0) {
+    parsed$date <- as.POSIXct(parsed$date, origin = "1970-01-01")
+  }
+  
+  # THreshold
+  threshold <- 60 * 60 * 24 * 7 # sec x min x hours x days
 
   # Filter existing
-  parsed <- parsed[!(parsed$url %in% db$url),]
-  
+  # Filter is:
+    # Listing was posted longer than 7 days ago
+    # Listing url does not yet exist in db
+  # Get new listings
+  new <- parsed[!(parsed$url %in% db$url),]
+  # Get relistings
+  relist <- parsed[parsed$url %in% db$url,]
+  # If no obs
+  if(nrow(relist) > 0) {
+    
+    # Calculate time of listing
+    relist$tdiff <- difftime(Sys.time(), relist$date, units = "secs")
+    # If relisting >= 7 days, also accept as 'new'
+    relist <- relist[relist$tdiff >= threshold,]
+    
+    # Remove timediff
+    relist$tdiff <- NULL
+    
+    # Join
+    parsed <- rbind(new, relist)
+    
+  } else {
+    
+    parsed <- new
+    
+  }
+
   message(paste0("Found ", nrow(parsed), " new listings ..."))
 
   # Add to existing
