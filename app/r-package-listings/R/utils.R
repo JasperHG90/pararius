@@ -20,6 +20,7 @@ loadDatabase <- function() {
       "new" = logical(),
       "agent" = character(),
       "price" = double(),
+      "bedrooms" = character(),
       "inclusive" = logical()
     )
 
@@ -215,7 +216,7 @@ requestPage <- function() {
 #'
 #' @param req request returned by 'requestPage()'
 #'
-#' @return data frame containing 6 columns (name, url, new listing, agent, price, price inclusive?) of parsed listing information
+#' @return data frame containing 7 columns (name, url, new listing, agent, price, bedrooms, price inclusive?) of parsed listing information
 #' @importFrom xml2 read_html
 #' @importFrom magrittr '%>%'
 #' @importFrom rvest html_node
@@ -286,6 +287,14 @@ parsePage <- function(req) {
         stringr::str_replace_all("\\n", "") %>%
         trimws()
 
+      bedrooms <- tmp %>%
+        html_node(css= "ul.property-features") %>%
+        html_node(css= "li.bedrooms") %>%
+        html_text() %>%
+        stringr::str_replace_all("\\n", "") %>%
+        trimws() 
+
+
       inclusive <- price %>%
         stringr::str_detect("incl")
 
@@ -301,6 +310,7 @@ parsePage <- function(req) {
         new = is_new,
         agent = agent,
         price = price,
+        bedrooms = bedrooms,
         inclusive = inclusive
       )
 
@@ -311,6 +321,7 @@ parsePage <- function(req) {
   apartments$name <- as.character(apartments$name)
   apartments$url <- as.character(apartments$url)
   apartments$agent <- as.character(apartments$agent)
+  apartments$bedrooms <- as.character(apartments$bedrooms)
 
   # Return
   return(as.tibble(apartments))

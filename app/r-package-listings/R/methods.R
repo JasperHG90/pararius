@@ -70,6 +70,9 @@ setMethod("update_rentals", "Pararius", function(x) {
 
   message(paste0("Found ", nrow(parsed), " new listings ..."))
 
+  #test output
+  message(parsed)
+  
   # Add to existing
   db <- rbind(db, parsed)
 
