@@ -27,6 +27,7 @@ if(Sys.getenv("MAIL_HOST") == "" |
 p <- Pararius(settings$place,
               settings$min_price,
               settings$max_price,
+              settings$bedrooms,
               list(settings$blacklist))
 
 ## Scrape results, filter & store in database
@@ -46,7 +47,10 @@ if(nrow(new) > 0) {
      paste0(
        '<ul>',
        '<li>',
-       '<p>url: ',new$url, '</p>',
+       '<p>url: www.pararius.nl',new$url, '</p>',
+       '</li>',
+       '<li>',
+       '<p>bedrooms: ',new$bedrooms, '</p>',
        '</li>',
        '<li>',
        '<p>name: ',new$name, '</p>',
