@@ -1,16 +1,15 @@
 # Settings go here 
 
 # Basics: input place, min price and max price
-place: den haag
-min_price: 200
-max_price: 700
+place: breda
+min_price: 900
+max_price: 1300
+bedrooms: 3
 
 # You can blacklist rental agencies
 blacklist:
-  - Duinzigt Wonen B.V.
-  - Vast Wonen
-  - Woonzeker Rentals
+  - MVGM
   
 # Email new listings from address to address 
-email_from: jasperdatacalture.com
-email_to: jasperginn@gmail.com
+email_from: dockerpararius.com
+email_to: dockerpararius@gmail.com
