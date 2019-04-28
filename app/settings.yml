@@ -12,4 +12,4 @@ blacklist:
   
 # Email new listings from address to address 
 email_from: dockerpararius.com
-email_to: parariusdocker@gmail.com
+email_to: dockerpararius@gmail.com
